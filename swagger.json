@@ -1,0 +1,1552 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Land-Management-System API",
+      "description": "Land-Management-System API",
+      "version": "1.0.0"
+    },
+    "schemes": ["http", "https"],
+    "securityDefinitions":{
+      "Bearer":{
+       "type":"apiKey",
+       "name":"Authorization",
+       "in":"header",
+       "description":"Enter the token for Authorization"
+      }
+      },
+    "paths": {
+      "/api/reseacher/signup": {
+        "post": {
+          "summary": "Create a Reseacher Account",
+          "description": "Create a Reseacher Account",
+          "tags": ["Reseacher"],
+          "parameters": [
+            
+            {
+              "in": "body",
+              "name": "body",
+              "schema": {
+                "$ref": "#/definitions/Reseacher"
+              },
+              "required": true,
+              "description": "Reseacher object"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Reseacher created"
+            }
+          }
+        }
+      },
+      "/api/landDetails/add": {
+        "post": {
+          "summary": "Create a Land Details",
+          "description": "Create a Land Details",
+          "tags": ["Land Details"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            
+            {
+              "in": "body",
+              "name": "body",
+              "schema": {
+                "$ref": "#/definitions/LandDetails"
+              },
+              "required": true,
+              "description": "LandDetails object"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Land Details created"
+            }
+          }
+        }
+      },
+      "/api/activity/add": {
+        "post": {
+          "summary": "Create a Land Activity",
+          "description": "Create a Land Activity",
+          "tags": ["Land-Activities"],
+          "consumes": ["multipart/form-data"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+  "parameters": [
+    {
+      "name": "landId",
+      "in": "formData",
+      "type": "string",
+      "description": "The ObjectId of landId to which the activity belongs",
+      "example": "609879f16836050e184a0db3",
+      "required": true
+    },
+    {
+      "name": "climate",
+      "in": "formData",
+      "type": "string",
+      "description": "climate of the land"
+    },
+    {
+      "name": "soil",
+      "in": "formData",
+      "type": "string",
+      "description": "Type of soil "
+    },
+    {
+      "name": "ph",
+      "in": "formData",
+      "type": "string",
+      "description": "The ph of the soil"
+    },
+    {
+      "name": "fertility",
+      "in": "formData",
+      "type": "string",
+      "description": "Fertility of the soil"
+    },
+    {
+      "name": "moisture",
+      "in": "formData",
+      "type": "string",
+      "description": "Moisture of the land"
+    },
+    {
+      "name": "image",
+      "in": "formData",
+      "type": "file",
+      "description": "Image of the land"
+    }
+  ],
+         
+          "responses": {
+            "201": {
+              "description": "Activity Application created"
+            }
+          }
+        }
+      }, 
+      
+      
+     
+      "/api/user/signup": {
+        "post": {
+          "summary": "Create a User Account",
+          "description": "Create a User Account",
+          "tags": ["User"],
+          "parameters": [
+            
+            {
+              "in": "body",
+              "name": "body",
+              "schema": {
+                "$ref": "#/definitions/User"
+              },
+              "required": true,
+              "description": "User object"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "User created"
+            }
+          }
+        }
+      },
+      "/api/landOwner/signup": {
+        "post": {
+          "summary": "Create a landOwner Account",
+          "description": "Create a landOwner Account",
+          "tags": ["LandOwner"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            
+            {
+              "in": "body",
+              "name": "body",
+              "schema": {
+                "$ref": "#/definitions/landOwner"
+              },
+              "required": true,
+              "description": "User object"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "User created"
+            }
+          }
+        }
+      },
+      "/api/reseacher/login": {
+        "post": {
+          "summary": "Login",
+          "description": "Login",
+          "tags": ["Authentication"],
+          "parameters":[{
+            "name":"body",
+            "in":"body",
+            "description":"reseacher details",
+            "required":"true",
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "email":{
+                   "type": "string",
+                    "required": [true,"Please provide email first"],
+                    "unique": "true",
+                    "lowercase": "true"
+                    },
+                   "password":{
+                    "type": "string",
+                    "required": [true,"Please provide password first"],
+                    "minLength": [8,"Must be at least 8 characters"]
+                    }
+                      
+                }
+            }
+        }],
+          "responses": {
+            "201": {
+              "description": "User Logged In"
+            }
+          }
+        }
+      },
+      "/api/user/login": {
+        "post": {
+          "summary": "Login",
+          "description": "Login",
+          "tags": ["Authentication"],
+          "parameters":[{
+            "name":"body",
+            "in":"body",
+            "description":"User details",
+            "required":"true",
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "email":{
+                   "type": "string",
+                    "required": [true,"Please provide email first"],
+                    "unique": "true",
+                    "lowercase": "true"
+                    },
+                   "password":{
+                    "type": "string",
+                    "required": [true,"Please provide password first"],
+                    "minLength": [8,"Must be at least 8 characters"]
+                    }
+                      
+                }
+            }
+        }],
+          "responses": {
+            "201": {
+              "description": "User Logged In"
+            }
+          }
+        }
+      },
+      "/api/landOwner/login": {
+        "post": {
+          "summary": "Login",
+          "description": "Login",
+          "tags": ["Authentication"],
+          "parameters":[{
+            "name":"body",
+            "in":"body",
+            "description":"landOwner details",
+            "required":"true",
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "email":{
+                   "type": "string",
+                    "required": [true,"Please provide email first"],
+                    "unique": "true",
+                    "lowercase": "true"
+                    },
+                   "password":{
+                    "type": "string",
+                    "required": [true,"Please provide password first"]
+                    
+                    }
+                      
+                }
+            }
+        }],
+          "responses": {
+            "201": {
+              "description": "landOwner Logged In"
+            }
+          }
+        }
+      },
+      "/api/reseacher/verifyotp": {
+        "post": {
+          "summary": "Verify Account",
+          "description": "Verify Account",
+          "tags": ["Authentication"],
+          "parameters":[{
+            "name":"body",
+            "in":"body",
+            "description":"Reseacher details",
+            "required":"true",
+            "schema":{
+              "type":"object",
+              "properties":{
+                  "otp":{
+                 "type": "string",
+                  "required": [true,"Please provide otp"]
+                  }                    
+              }
+          }
+      }],
+          "responses": {
+            "201": {
+              "description": "Reseacher Account Verified!"
+            }
+          }
+        }
+      },
+      "/api/user/verifyotp": {
+        "post": {
+          "summary": "Verify Account",
+          "description": "Verify Account",
+          "tags": ["Authentication"],
+          "parameters":[{
+            "name":"body",
+            "in":"body",
+            "description":"User details",
+            "required":"true",
+            "schema":{
+              "type":"object",
+              "properties":{
+                  "otp":{
+                 "type": "string",
+                  "required": [true,"Please provide otp"]
+                  }                    
+              }
+          }
+      }],
+          "responses": {
+            "201": {
+              "description": "User Account Verified!"
+            }
+          }
+        }
+      },
+      "/api/landOwner/verifyotp": {
+        "post": {
+          "summary": "Verify Account",
+          "description": "Verify Account",
+          "tags": ["Authentication"],
+          "parameters":[{
+            "name":"body",
+            "in":"body",
+            "description":"User details",
+            "required":"true",
+            "schema":{
+              "type":"object",
+              "properties":{
+                  "otp":{
+                 "type": "string",
+                  "required": [true,"Please provide otp"]
+                  }                    
+              }
+          }
+      }],
+          "responses": {
+            "201": {
+              "description": "User Account Verified!"
+            }
+          }
+        }
+      },
+      "/api/reseacher/forgot": {
+        "post": {
+          "summary": "Forgot Password",
+          "description": "Forgot Password",
+          "tags": ["Reseacher"],
+         
+          "parameters":[{
+            "name":"body",
+            "in":"body",
+            "description":"Reseacher email if forgot password",
+            "required":"true",
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "email":{
+                   "type": "string",
+                    "required": [true,"Please provide email first"],
+                    "unique": "true",
+                    "lowercase": "true"
+                    }    
+                }
+            }
+        }],
+          "responses": {
+            "201": {
+              "description": "We sent you an email to reset your password"
+            }
+          }
+        }
+      },
+      "/api/landOwner/forgot": {
+        "post": {
+          "summary": "Forgot Password",
+          "description": "Forgot Password",
+          "tags": ["LandOwner"],
+          
+          "parameters":[{
+            "name":"body",
+            "in":"body",
+            "description":"LandOwner email if forgot password",
+            "required":"true",
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "email":{
+                   "type": "string",
+                    "required": [true,"Please provide email first"],
+                    "unique": "true",
+                    "lowercase": "true"
+                    }
+                    
+                      
+                }
+            }
+        }],
+          "responses": {
+            "201": {
+              "description": "We sent you an email to reset your password"
+            }
+          }
+        }
+      },
+      "/api/user/forgot": {
+        "post": {
+          "summary": "Forgot Password",
+          "description": "Forgot Password",
+          "tags": ["User"],
+          
+          "parameters":[{
+            "name":"body",
+            "in":"body",
+            "description":"User email if forgot password",
+            "required":"true",
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "email":{
+                   "type": "string",
+                    "required": [true,"Please provide email first"],
+                    "unique": "true",
+                    "lowercase": "true"
+                    }
+                    
+                      
+                }
+            }
+        }],
+          "responses": {
+            "201": {
+              "description": "We sent you an email to reset your password"
+            }
+          }
+        }
+      },
+      "/api/reseacher/resetpassword/{token}": {
+        "post": {
+          "summary": "Reset Password",
+          "description": "Reset Password",
+          "tags": ["Authentication"],
+          "parameters":[{
+            "name":"body",
+            "in":"body",
+            "description":"Reseacher details",
+            "required":"true",
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "email":{
+                   "type": "string",
+                    "required": [true,"Please provide email first"],
+                    "unique": "true",
+                    "lowercase": "true"
+                    },
+                   "newPassword":{
+                    "type": "string",
+                    "required": [true,"Please provide password first"],
+                    "minLength": [8,"Must be at least 8 characters"]
+                    },
+                    "confirm":{
+                      "type": "string",
+                      "required": [true,"Please provide password first"],
+                      "minLength": [8,"Must be at least 8 characters"]
+                    }
+                      
+                }
+            }
+        }],
+          "responses": {
+            "201": {
+              "description": "Password Reseted"
+            }
+          }
+        }
+      },
+      "/api/landOwner/resetpassword/{token}": {
+        "post": {
+          "summary": "Reset Password",
+          "description": "Reset Password",
+          "tags": ["Authentication"],
+          "parameters":[{
+            "name":"body",
+            "in":"body",
+            "description":"LandOwner details",
+            "required":"true",
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "email":{
+                   "type": "string",
+                    "required": [true,"Please provide email first"],
+                    "unique": "true",
+                    "lowercase": "true"
+                    },
+                   "newPassword":{
+                    "type": "string",
+                    "required": [true,"Please provide password first"],
+                    "minLength": [8,"Must be at least 8 characters"]
+                    },
+                    "confirm":{
+                      "type":"string",
+                      "required": [true,"Please provide password first"],
+                    "minLength": [8,"Must be at least 8 characters"]
+                    }
+                      
+                }
+            }
+        }],
+          "responses": {
+            "201": {
+              "description": "Password Reseted"
+            }
+          }
+        }
+      },
+      "/api/user/resetpassword/{token}": {
+        "post": {
+          "summary": "Reset Password",
+          "description": "Reset Password",
+          "tags": ["Authentication"],
+          "parameters":[{
+            "name":"body",
+            "in":"body",
+            "description":"User details",
+            "required":"true",
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "email":{
+                   "type": "string",
+                    "required": [true,"Please provide email first"],
+                    "unique": "true",
+                    "lowercase": "true"
+                    },
+                   "newPassword":{
+                    "type": "string",
+                    "required": [true,"Please provide password first"],
+                    "minLength": [8,"Must be at least 8 characters"]
+                    },
+                    "confirm":{
+                      "required": [true,"Please provide password first"],
+                    "minLength": [8,"Must be at least 8 characters"]
+                    }
+                      
+                }
+            }
+        }],
+          "responses": {
+            "201": {
+              "description": "Password Reseted"
+            }
+          }
+        }
+      },
+      "/api/reseacher/logout": {
+        "post": {
+          "summary": "Logout",
+          "description": "Logout",
+          "tags": ["Reseacher"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "responses": {
+            "201": {
+              "description": "Logout"
+            }
+          }
+        }
+      },
+      "/api/landOwner/logout": {
+        "post": {
+          "summary": "Logout",
+          "description": "Logout",
+          "tags": ["LandOwner"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "responses": {
+            "201": {
+              "description": "Logout"
+            }
+          }
+        }
+      },
+      "/api/user/logout": {
+        "post": {
+          "summary": "Logout",
+          "description": "Logout",
+          "tags": ["User"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            
+            {
+          
+              "required": true,
+              "description": "User object"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Logout"
+            }
+          }
+        }
+      },
+      "/api/reseacher/all": {
+        "get": {
+          "summary": "List all Reseachers Account",
+          "description": "List of Teacher Account",
+          "tags": ["Reseacher"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "responses": {
+            "201": {
+              "description": "List of Reseacher Account"
+            }
+          }
+        }
+      },
+      "/api/landDetails/getall": {
+        "get": {
+          "summary": "List all Land Details",
+          "description": "List of Land Details",
+          "tags": ["Land Details"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "responses": {
+            "201": {
+              "description": "List of Land Details"
+            }
+          }
+        }
+      },
+      "/api/activity/getAll": {
+        "get": {
+          "summary": "List all Land Activities",
+          "description": "List of Land Activities",
+          "tags": ["Land-Activities"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "responses": {
+            "201": {
+              "description": "List of Land Activities"
+            }
+          }
+        }
+      },
+     
+      "/api/landOwner/all": {
+        "get": {
+          "summary": "List all LandOwner Account",
+          "description": "List of landOwner Account",
+          "tags": ["LandOwner"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "responses": {
+            "201": {
+              "description": "List of LandOwners Account"
+            }
+          }
+        }
+      },
+      "/api/user/all": {
+        "get": {
+          "summary": "List all User Account",
+          "description": "List of User Account",
+          "tags": ["User"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            
+            {
+              "in": "body",
+              "name": "body",
+              "schema": {
+                "$ref": "#/definitions/User"
+              },
+              "required": true,
+              "description": "User object"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "List of User Account"
+            }
+          }
+        }
+      },
+      "/api/reseacher/getOne/{id}": { 
+        "get": {
+          "summary": "Get Reseacher Account by Id",
+          "description": "Get Reseacher Account by Id",
+          "tags": ["Reseacher"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the reseacher to retrieve",
+              "required": true,
+              "type": "string"
+            }
+  
+          ],
+          "responses": {
+            "201": {
+              "description": "reseacher Account"
+            }
+          }
+        }
+      },
+      "/api/landDetails/getOne/{id}": {
+        "get": {
+          "summary": "Get Land Details by Id",
+          "description": "Get Land Details by Id",
+          "tags": ["Land Details"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the land to retrieve",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": " Land Details"
+            }
+          }
+        }
+      },
+      "/api/activity/getOne/{id}": {
+        "get": {
+          "summary": "Get Land Activity by Id",
+          "description": "Get Land Activity by Id",
+          "tags": ["Land-Activities"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the Land to retrieve",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Land Application"
+            }
+          }
+        }
+      },
+  
+      "/api/landOwner/getOne/{id}": {
+        "get": {
+          "summary": "Get LandOwner Account by Id",
+          "description": "Get LandOwner Account by Id",
+          "tags": ["LandOwner"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the LandOwner to retrieve",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": " LandOwner Account"
+            }
+          }
+        }
+      },
+      
+      "/api/reseacher/findBynames": {
+        "get": {
+          "summary": "Get reseacher Account by Name",
+          "description": "Get reseacher Account by Name",
+          "tags": ["Reseacher"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            
+            {
+              "name": "reseacher Name",
+              "in": "query",
+              "schema": {
+                "$ref": "#/definitions/Reseacher"
+              },
+              "required": true,
+              "description": "reseacher object"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": " reseacherS Account"
+            }
+          }
+        }
+      },
+      "/api/landDetails/getByUPI": {
+        "get": {
+          "summary": "Get Land Details by upi",
+          "description": "Get  Land Details by UPI",
+          "tags": ["Land Details"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            
+            {
+              "name": "name",
+              "in": "query",
+              "description": "UPI of the  Land to retrieve",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Land Details by Name"
+            }
+          }
+        }
+      },
+      "/api/reseacher/findByusername": {
+        "get": {
+          "summary": "Get Teacher Account by Username",
+          "description": "Get Teacher Account by Username",
+          "tags": ["Reseacher"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            
+            {
+              "name": "Username",
+              "in": "query",
+              "schema": {
+                "$ref": "#/definitions/Reseacher"
+              },
+              "required": true,
+              "description": "reseacher object"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": " reseachers Account by School Name"
+            }
+          }
+        }
+      },
+     
+      "/api/reseacher/put/{id}": {
+        "put": {
+          "summary": "Update Reseacher Account ",
+          "description": "Update Reseacher Account ",
+          "tags": ["Reseacher"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+  "parameters":[{
+    "name":"id",
+    "in":"path",
+    "description":"ID of the user to update",
+    "required":"true",
+    "type":"string"
+    },
+    {
+        "name": "body",
+        "in": "body",
+        "description": "User details",
+        "required": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+               "username":{
+                "type": "string"
+             },
+             "names":{
+              "type": "string"
+           },
+             "profile": {
+               "names": { "type": "String" },
+               "bio": { "type": "String" },
+               "avatar": { "type": "String" }
+           },
+          
+             "email":{
+             "type": "string",
+             "required": [true,"Please provide email first"],
+             "unique": "true",
+             "lowercase": "true"
+             },
+             "password":{
+              "type":"string"
+             }
+               
+          }
+        }
+      }],
+          "responses": {
+            "201": {
+              "description": " Update reseacher Account "
+            }
+          }
+        }
+      },
+      "/api/landDetails/put/{id}": {
+        "put": {
+          "summary": "Update Land Details ",
+          "description": "Update Land Details ",
+          "tags": ["Land Details"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the land to update",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "schema": {
+                "$ref": "#/definitions/Land Details"
+              },
+              "required": true,
+              "description": "Land Details object"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": " Update Land Details "
+            }
+          }
+        }
+      },
+      "/api/activity/update/{id}": {
+        "put": {
+          "summary": "Update Land Activity",
+          "description": "Update Land Activity",
+          "tags": ["Land-Activities"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+  "parameters":[{
+    "name":"id",
+    "in":"path",
+    "description":"ID of the land to update",
+    "required":"true",
+    "type":"string"
+    },
+    {
+      "name": "climate",
+      "in": "formData",
+      "type": "string",
+      "description": "Full Name of the Teacher who requesting the loan"
+    },
+    {
+      "name": "soil",
+      "in": "formData",
+      "type": "string",
+      "description": "Email of Teacher who requesting the loan"
+    },
+    {
+      "name": "ph",
+      "in": "formData",
+      "type": "string",
+      "description": "ID of teacher who requesting the loan"
+    },
+    {
+      "name": "fertility",
+      "in": "formData",
+      "type": "string",
+      "description": "Phone Number of Teacher who requesting the loan"
+    },
+    {
+      "name": "image",
+      "in": "formData",
+      "type": "string",
+      "description": "Marital status of Teacher who requesting the loan"
+    },
+    {
+      "name": "moisture",
+      "in": "formData",
+      "type": "string",
+      "description": "School name of where teacher work"
+    }],
+          "responses": {
+            "201": {
+              "description": " Update Loan Application"
+            }
+          }
+        }
+      },
+     
+      "/api/landOwner/put/{id}": {
+        "put": {
+          "summary": "Update landOwner Account ",
+          "description": "Update landOwner Account ",
+          "tags": ["LandOwner"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+  "parameters":[{
+    "name":"body",
+    "in":"body",
+    "description":"landOwner details",
+    "required":"true",
+    "schema":{
+        "type":"object",
+        "properties":{
+          "username": {
+            "type": "string"
+          },
+          "names": {
+            "type": "string"
+          },
+          "profile": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+              
+        }
+    }
+  }],
+          "responses": {
+            "201": {
+              "description": " Update Manager Account "
+            }
+          }
+        }
+      },
+      "/api/user/put/{id}": {
+        "put": {
+          "summary": "Update User Account ",
+          "description": "Update User Account ",
+          "tags": ["User"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the user to update",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                     "username":{
+                      "type": "string"
+                   },
+                   "names":{
+                    "type": "string"
+                 },               
+                   "email":{
+                   "type": "string",
+                   "unique": "true",
+                   "lowercase": "true"
+                   }
+                     
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": " Update User Account "
+            }
+          }
+        }
+      },
+     
+      "/api/user/update/{id}": {
+        "put": {
+          "summary": "Update Password",
+          "description": "Update Password",
+          "tags": ["User"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+  "parameters":[{
+    "name":"id",
+    "in":"path",
+    "description":"ID of the user to update Password",
+    "required":"true",
+    "type":"string"
+    },
+    {
+        "name": "body",
+        "in": "body",
+        "description": "User details",
+        "required": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+                 
+  
+            "currentPassword":{
+             "type": "string",
+             "required": [true,"Please provide password first"]
+             },
+               "newPassword":{
+                "type": "string",
+                "required": [true,"Please provide email first"],
+                "minLength": [8,"Must be at least 8 characters"]
+               },
+               "confirm":{
+                "type": "string",
+                "required": [true,"Please provide password first"],
+                "minLength": [8,"Must be at least 8 characters"]
+               }
+               
+               
+          }
+        }
+      }
+  ],
+          "responses": {
+            "201": {
+              "description": "User Account Password Updated"
+            }
+          }
+        }
+      },
+      "/api/landOwner/update/{id}": {
+        "put": {
+          "summary": "Update Password",
+          "description": "Update Password",
+          "tags": ["LandOwner"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+  "parameters":[{
+    "name":"id",
+    "in":"path",
+    "description":"ID of the user to update Password",
+    "required":"true",
+    "type":"string"
+    },
+    {
+        "name": "body",
+        "in": "body",
+        "description": "LandOwner details",
+        "required": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "currentPassword":{
+              "type": "string",
+              "required": [true,"Please provide current passsword first"]
+              },
+               "newPassword":{
+                "type": "string",
+                "required": [true,"Please provide new password first"],
+                "minLength": [8,"Must be at least 8 characters"]
+               },
+               "confirm":{
+                "type": "string",
+                "required": [true,"Please provide new password first"],
+                "minLength": [8,"Must be at least 8 characters"]
+               }
+                         
+          }
+        }
+      }
+  ],
+          "responses": {
+            "201": {
+              "description": "Manager Account Password Updated"
+            }
+          }
+        }
+      },
+      "/api/reseacher/delete/{id}": {
+        "delete": {
+          "summary": "Delete a Reseacher Account",
+          "description": "Delete a Reseacher Account",
+          "tags": ["Reseacher"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the teacher to delete",
+              "required": true,
+              "type": "string"
+            }
+  
+            
+          ],
+          "responses": {
+            "201": {
+              "description": "Delete Teacher Account"
+            }
+          }
+        }
+      },
+      
+      "/api/landDetails/delete/{id}": {
+        "delete": {
+          "summary": "Delete a Land Details",
+          "description": "Delete a LandDetails",
+          "tags": ["Land Details"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the teacher detail to delete",
+              "required": true,
+              "type": "string"
+            }
+  
+            
+          ],
+          "responses": {
+            "201": {
+              "description": "Delete a Teacher Details"
+            }
+          }
+        }
+      },
+      "/api/activity/delete/{id}": {
+        "delete": {
+          "summary": "Delete a Land Activities",
+          "description": "Delete a Loan Application",
+          "tags": ["Land-Activities"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the loan to delete",
+              "required": true,
+              "type": "string"
+            }
+  
+            
+          ],
+          "responses": {
+            "201": {
+              "description": "Delete a Loan Application"
+            }
+          }
+        }
+      },
+      "/api/landOwner/delete/{id}": {
+        "delete": {
+          "summary": "Delete a Manager Account",
+          "description": "Delete a Manager Account",
+          "tags": ["LandOwner"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the teacher to delete",
+              "required": true,
+              "type": "string"
+            }
+  
+          ],
+          "responses": {
+            "201": {
+              "description": "Delete Manager Account"
+            }
+          }
+        }
+      },
+      "/api/user/delete/{id}": {
+        "delete": {
+          "summary": "Delete a User Account",
+          "description": "Delete a User Account",
+          "tags": ["User"],
+          "security":[
+            {
+          "Bearer":[]
+             }
+  ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the user to delete",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Delete User Account"
+            }
+          }
+        }
+      }
+      
+  },
+    "definitions": {
+      "Reseacher": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "names": {
+            "type": "string"
+          },
+          "profile": {
+            "type": "string"
+          },
+         
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+    }
+  ,
+  "LandOwner": {
+    "type": "object",
+    "properties": {
+      "username": {
+        "type": "string"
+      },
+      "names": {
+        "type": "string"
+      },
+      "profile": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string"
+      },
+      "password": {
+        "type": "string"
+      }
+    }
+  },
+  "User":{
+    "type": "object",
+    "properties": {
+      "username":{
+        "type": "string"
+      },
+      "names":{
+        "type": "string"
+      },
+     
+      "email":{
+        "type": "string"
+      },
+      "password": {
+        "type": "string"
+      }
+    }
+  
+  },
+  "Land-Activities":{
+    "type": "object",
+    "properties": {
+      "climate":{
+        "type":"string"
+      },
+      "landId":{
+        "type":"string"
+      },
+      "soil":{
+        "type":"string"
+      },
+      "ph":{
+        "type":"string"
+      },
+      "fertility":{
+        "type":"string"
+      },
+      "moisture":{
+        "type":"string"
+      },
+      "image":{
+        "type":"string"
+      }
+  
+    }
+  
+  },
+  "Land-Details":{
+    "type": "object",
+    "properties": {
+      "UPI":{
+        "type": "string"
+      },
+      "owner":{
+        "type": "string"
+      },
+     
+      "size":{
+        "type": "string"
+      },
+      "Location": {
+        "type": "string"
+      },
+      "Destiny": {
+        "type": "string"
+      },
+      "proofOfLand": {
+        "type": "string"
+      }
+    }
+  
+  }
+  }
+  }
+      
+  
+  
+  
