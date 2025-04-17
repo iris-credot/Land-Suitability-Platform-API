@@ -6,13 +6,8 @@ const schema = Joi.object({
    
     email: Joi.string().email().required(),
     password: Joi.string().min(6).required(),
-    profile: Joi.object({
-        names: Joi.string().allow(''),
-        bio: Joi.string().allow(''),
-        avatar: Joi.string().allow('')
-    }),
     username: Joi.string().required(),
-    role: Joi.string().optional().default('teacher').invalid('Please do not provide the role.')
+    role: Joi.string().optional().default('researcher').invalid('Please do not provide the role.')
 }).options({ allowUnknown: true });
 
 // Middleware function to validate request bodies using Joi schema
@@ -32,7 +27,7 @@ const validateRequest = (req, res, next) => {
         return res.status(400).json({ error: error.details[0].message });
     } else {
         // Add the default 'role' to the validated data
-        value.role = 'teacher';
+        value.role = 'researcher';
         req.validatedData = value;
         next();
     }

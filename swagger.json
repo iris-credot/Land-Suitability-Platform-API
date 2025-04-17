@@ -1439,9 +1439,6 @@
           "names": {
             "type": "string"
           },
-          "profile": {
-            "type": "string"
-          },
          
           "email": {
             "type": "string"
